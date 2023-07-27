@@ -11,31 +11,13 @@ public class Rental
         DaysRented = daysRented;
     }
     
-    public decimal DetermineAmount()
-    {
-        decimal thisAmount = 0;
-        switch (Movie.PriceCode)
-        {
-            case Movie.REGULAR:
-                thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
-                break;
-            case Movie.CHILDREN:
-                thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
+    public decimal DetermineAmount() => Movie.CalculateAmountByDaysRented(DaysRented);
 
-                break;
-        }
-
-        return thisAmount;
-    }
-    
     public int CalculateFrequentRenterPoints()
     {
         var frequentRenterPoints = 1;
-
-        if (Movie.PriceCode == Movie.NEW_RELEASE && DaysRented > 1)
+        
+        if (Movie is NewReleaseMovie && DaysRented > 1)
         {
             frequentRenterPoints++;
         }
