@@ -34,7 +34,7 @@ public class Customer
         }
 
         result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-        result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points \n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points \n";
 
         return result;
     }

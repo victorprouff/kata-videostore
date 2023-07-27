@@ -9,7 +9,7 @@ public class RentalTests
     [InlineData(5, 6.5)]
     public void TestDetermineAmountWithRegularMovie(int daysRentals, decimal expectedAmount)
     {
-        var rental = new Rental(new Movie("Lord Of the rings", Movie.REGULAR), daysRentals);
+        var rental = new Rental(new RegularMovie("Lord Of the rings"), daysRentals);
 
         var result = rental.DetermineAmount();
         
@@ -21,7 +21,7 @@ public class RentalTests
     [InlineData(5, 15)]
     public void TestDetermineAmountWithNewReleaseMovie(int daysRentals, decimal expectedAmount)
     {
-        var rental = new Rental(new Movie("Lord Of the rings", Movie.NEW_RELEASE), daysRentals);
+        var rental = new Rental(new NewReleaseMovie("Lord Of the rings"), daysRentals);
 
         var result = rental.DetermineAmount();
         
@@ -33,19 +33,7 @@ public class RentalTests
     [InlineData(5, 4.5)]
     public void TestDetermineAmountWithChildrenMovie(int daysRentals, decimal expectedAmount)
     {
-        var rental = new Rental(new Movie("Lord Of the rings", Movie.CHILDREN), daysRentals);
-
-        var result = rental.DetermineAmount();
-        
-        result.Should().Be(expectedAmount);
-    }
-    
-    [Theory]
-    [InlineData(2, 0)]
-    [InlineData(5, 0)]
-    public void TestDetermineAmountWithOtherPriceCodeMovie(int daysRentals, decimal expectedAmount)
-    {
-        var rental = new Rental(new Movie("Lord Of the rings", 42), daysRentals);
+        var rental = new Rental(new ChildrenMovie("Lord Of the rings"), daysRentals);
 
         var result = rental.DetermineAmount();
         
@@ -53,17 +41,35 @@ public class RentalTests
     }
 
     [Theory]
-    [InlineData(Movie.REGULAR, 1, 1)]
-    [InlineData(Movie.REGULAR, 5, 1)]
-    [InlineData(Movie.NEW_RELEASE, 1, 1)]
-    [InlineData(Movie.NEW_RELEASE, 5, 2)]
-    [InlineData(Movie.CHILDREN, 1, 1)]
-    [InlineData(Movie.CHILDREN, 5, 1)]
-    [InlineData(15, 1, 1)]
-    [InlineData(15, 5, 1)]
-    public void TestCalculateFrequentRenterPoints(int priceCode, int daysRentals, int points)
+    [InlineData(1, 1)]
+    [InlineData(5, 1)]
+    public void TestCalculateFrequentRenterPointsForRegularMovie(int daysRentals, int points)
     {
-        var rental = new Rental(new Movie("Lord Of the rings", priceCode), daysRentals);
+        var rental = new Rental(new RegularMovie("Lord Of the rings"), daysRentals);
+
+        var result = rental.CalculateFrequentRenterPoints();
+        
+        result.Should().Be(points);
+    }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(5, 2)]
+    public void TestCalculateFrequentRenterPointsForNewReleaseMovie(int daysRentals, int points)
+    {
+        var rental = new Rental(new NewReleaseMovie("Lord Of the rings"), daysRentals);
+
+        var result = rental.CalculateFrequentRenterPoints();
+        
+        result.Should().Be(points);
+    }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(5, 1)]
+    public void TestCalculateFrequentRenterPointsForChildrenMovie(int daysRentals, int points)
+    {
+        var rental = new Rental(new ChildrenMovie("Lord Of the rings"), daysRentals);
 
         var result = rental.CalculateFrequentRenterPoints();
         
