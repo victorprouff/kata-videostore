@@ -18,17 +18,12 @@ public class Rental
         {
             case Movie.REGULAR:
                 thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
-
                 break;
             case Movie.NEW_RELEASE:
-                thisAmount += Movie.CalculateAmountByDaysRented(DaysRented);
+                thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
                 break;
             case Movie.CHILDREN:
-                thisAmount += Movie.BaseAmount;
-                if (DaysRented > 3)
-                {
-                    thisAmount += (DaysRented - 3) * 1.5m;
-                }
+                thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
 
                 break;
         }

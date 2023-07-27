@@ -57,6 +57,12 @@ public class ChildrenMovie : Movie
 
     public override decimal CalculateAmountByDaysRented(int daysRented)
     {
-        throw new NotImplementedException();
+        var amount = BaseAmount;
+        if (daysRented > 3)
+        {
+            amount += (daysRented - 3) * 1.5m;
+        }
+
+        return amount;
     }
 }

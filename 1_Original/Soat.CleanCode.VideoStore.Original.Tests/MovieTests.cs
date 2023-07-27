@@ -27,4 +27,16 @@ public class MovieTests
         
         result.Should().Be(expectedAmount);
     }
+    
+    [Theory]
+    [InlineData(2, 1.5)]
+    [InlineData(5, 4.5)]
+    public void TestCalculateAmountByDaysRentedOfChildrenMovie(int daysRentals, decimal expectedAmount)
+    {
+        var movie = new ChildrenMovie("Lord Of the rings");
+
+        var result = movie.CalculateAmountByDaysRented(daysRentals);
+        
+        result.Should().Be(expectedAmount);
+    }
 }
