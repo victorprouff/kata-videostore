@@ -51,4 +51,22 @@ public class RentalTests
         
         result.Should().Be(expectedAmount);
     }
+
+    [Theory]
+    [InlineData(Movie.REGULAR, 1, 1)]
+    [InlineData(Movie.REGULAR, 5, 1)]
+    [InlineData(Movie.NEW_RELEASE, 1, 1)]
+    [InlineData(Movie.NEW_RELEASE, 5, 2)]
+    [InlineData(Movie.CHILDREN, 1, 1)]
+    [InlineData(Movie.CHILDREN, 5, 1)]
+    [InlineData(15, 1, 1)]
+    [InlineData(15, 5, 1)]
+    public void TestCalculateFrequentRenterPoints(int priceCode, int daysRentals, int points)
+    {
+        var rental = new Rental(new Movie("Lord Of the rings", priceCode), daysRentals);
+
+        var result = rental.CalculateFrequentRenterPoints();
+        
+        result.Should().Be(points);
+    }
 }

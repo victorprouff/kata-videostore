@@ -2,7 +2,7 @@
 
 public class Rental
 {
-    public int DaysRented { get; }
+    private int DaysRented { get; }
     public virtual Movie Movie { get; }
 
     public Rental(Movie movie, int daysRented)
@@ -38,5 +38,17 @@ public class Rental
         }
 
         return thisAmount;
+    }
+    
+    public int CalculateFrequentRenterPoints()
+    {
+        var frequentRenterPoints = 1;
+
+        if (Movie.PriceCode == Movie.NEW_RELEASE && DaysRented > 1)
+        {
+            frequentRenterPoints++;
+        }
+
+        return frequentRenterPoints;
     }
 }

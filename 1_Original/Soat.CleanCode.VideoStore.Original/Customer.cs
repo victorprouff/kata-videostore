@@ -27,12 +27,7 @@ public class Customer
         {
             var thisAmount = rental.DetermineAmount();
 
-            frequentRenterPoints++;
-
-            if (rental.Movie.PriceCode == Movie.NEW_RELEASE && rental.DaysRented > 1)
-            {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints = rental.CalculateFrequentRenterPoints();
 
             result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             totalAmount += thisAmount;
