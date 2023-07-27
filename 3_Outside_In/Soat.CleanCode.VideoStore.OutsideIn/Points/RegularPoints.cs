@@ -1,7 +1,6 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Points
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Points;
+
+public class RegularPoints : IPoints
 {
-    public class RegularPoints : IPoints
-    {
-        public int ComputePoints(Duration duration) => 1;
-    }
+    public int ComputePoints(Duration duration) => 1;
 }

@@ -1,7 +1,6 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Points
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Points;
+
+public interface IPoints
 {
-    public interface IPoints
-    {
-        int ComputePoints(Duration duration);
-    }
+    int ComputePoints(Duration duration);
 }

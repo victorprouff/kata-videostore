@@ -1,7 +1,6 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn;
+
+public interface IPricer
 {
-    public interface IPricer
-    {
-        IPrice GetPrice(Movie movie);
-    }
+    IPrice GetPrice(Movie movie);
 }

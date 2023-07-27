@@ -1,9 +1,8 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn;
+
+public enum PriceCode
 {
-    public enum PriceCode
-    {
-        Children,
-        NewRelease,
-        Regular
-    }
+    Children,
+    NewRelease,
+    Regular
 }

@@ -1,7 +1,6 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Fees
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Fees;
+
+public interface IFees
 {
-    public interface IFees
-    {
-        Amount ComputeAmount(Duration duration);
-    }
+    Amount ComputeAmount(Duration duration);
 }

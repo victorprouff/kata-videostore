@@ -1,23 +1,22 @@
-﻿namespace Soat.CleanCode.VideoStore.UncleBob
+﻿namespace Soat.CleanCode.VideoStore.UncleBob;
+
+public class ChildrensMovie : Movie
 {
-    public class ChildrensMovie : Movie
+    public ChildrensMovie(string title) : base(title) { }
+
+    public override decimal DetermineAmount(int daysRented)
     {
-        public ChildrensMovie(string title) : base(title) { }
-
-        public override decimal DetermineAmount(int daysRented)
+        var thisAmount = 1.5m;
+        if (daysRented > 3)
         {
-            var thisAmount = 1.5m;
-            if (daysRented > 3)
-            {
-                thisAmount += (daysRented - 3) * 1.5m;
-            }
-
-            return thisAmount;
+            thisAmount += (daysRented - 3) * 1.5m;
         }
 
-        public override int DetermineFrequentRenterPoints(int daysRented)
-        {
-            return 1;
-        }
+        return thisAmount;
+    }
+
+    public override int DetermineFrequentRenterPoints(int daysRented)
+    {
+        return 1;
     }
 }

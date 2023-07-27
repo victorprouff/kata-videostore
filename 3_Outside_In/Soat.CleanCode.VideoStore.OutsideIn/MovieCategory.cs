@@ -1,8 +1,7 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn;
+
+public enum MovieCategory
 {
-    public enum MovieCategory
-    {
-        Children,
-        Regular
-    }
+    Children,
+    Regular
 }

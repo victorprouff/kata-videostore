@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoFixture.Xunit2;
-using FluentAssertions;
-using Moq;
-using Soat.CleanCode.VideoStore.OutsideIn.Tests.AutoMoq;
-using Xunit;
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn.Tests;
 
-namespace Soat.CleanCode.VideoStore.OutsideIn.Tests
+public class RentalReportShould
 {
-    public class RentalReportShould
-    {
 //        [Theory, AutoMoqData]
 //        public void Generate_Header(string customer, [Frozen] Mock<IPricer> pricer)
 //        {
@@ -108,5 +100,4 @@ namespace Soat.CleanCode.VideoStore.OutsideIn.Tests
 //        {
 //            // TODO
 //        }
-    }
 }

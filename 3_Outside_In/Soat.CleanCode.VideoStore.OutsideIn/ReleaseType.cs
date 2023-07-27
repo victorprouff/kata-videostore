@@ -1,8 +1,7 @@
-﻿namespace Soat.CleanCode.VideoStore.OutsideIn
+﻿namespace Soat.CleanCode.VideoStore.OutsideIn;
+
+public enum ReleaseType
 {
-    public enum ReleaseType
-    {
-        None,
-        New
-    }
+    None,
+    New
 }
