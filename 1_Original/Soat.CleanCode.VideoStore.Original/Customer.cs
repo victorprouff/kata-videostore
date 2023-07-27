@@ -27,7 +27,7 @@ public class Customer
         {
             var thisAmount = rental.DetermineAmount();
 
-            frequentRenterPoints = rental.CalculateFrequentRenterPoints();
+            frequentRenterPoints += rental.CalculateFrequentRenterPoints();
 
             result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
             totalAmount += thisAmount;
