@@ -46,10 +46,7 @@ public class NewReleaseMovie : Movie
     {
     }
 
-    public override decimal CalculateAmountByDaysRented(int daysRented)
-    {
-        throw new NotImplementedException();
-    }
+    public override decimal CalculateAmountByDaysRented(int daysRented) => daysRented * BaseAmount;
 }
 
 public class ChildrenMovie : Movie

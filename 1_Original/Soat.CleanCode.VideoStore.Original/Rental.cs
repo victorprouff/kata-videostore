@@ -21,7 +21,7 @@ public class Rental
 
                 break;
             case Movie.NEW_RELEASE:
-                thisAmount += DaysRented * Movie.BaseAmount;
+                thisAmount += Movie.CalculateAmountByDaysRented(DaysRented);
                 break;
             case Movie.CHILDREN:
                 thisAmount += Movie.BaseAmount;

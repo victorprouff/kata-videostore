@@ -15,4 +15,16 @@ public class MovieTests
         
         result.Should().Be(expectedAmount);
     }
+    
+    [Theory]
+    [InlineData(2, 6)]
+    [InlineData(5, 15)]
+    public void TestCalculateAmountByDaysRentedOfNewReleaseMovie(int daysRentals, decimal expectedAmount)
+    {
+        var movie = new NewReleaseMovie("Lord Of the rings");
+
+        var result = movie.CalculateAmountByDaysRented(daysRentals);
+        
+        result.Should().Be(expectedAmount);
+    }
 }
