@@ -24,31 +24,7 @@ public class Customer
         var result = "Rental Record for " + Name + "\n";
         foreach (var rental in _rentals)
         {
-            var thisAmount = 0m;
-
-            //dtermines the amount for each line
-            switch (rental.Movie.PriceCode)
-            {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (rental.DaysRented > 2)
-                    {
-                        thisAmount += (rental.DaysRented - 2) * 1.5m;
-                    }
-
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += rental.DaysRented * 3;
-                    break;
-                case Movie.CHILDREN:
-                    thisAmount += 1.5m;
-                    if (rental.DaysRented > 3)
-                    {
-                        thisAmount += (rental.DaysRented - 3) * 1.5m;
-                    }
-
-                    break;
-            }
+            var thisAmount = DetermineAmountForRentals(rental);
 
             frequentRenterPoints++;
 
@@ -66,5 +42,34 @@ public class Customer
         result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points \n";
 
         return result;
+    }
+
+    private static decimal DetermineAmountForRentals(Rental rental)
+    {
+        decimal thisAmount = 0;
+        switch (rental.Movie.PriceCode)
+        {
+            case Movie.REGULAR:
+                thisAmount += 2;
+                if (rental.DaysRented > 2)
+                {
+                    thisAmount += (rental.DaysRented - 2) * 1.5m;
+                }
+
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += rental.DaysRented * 3;
+                break;
+            case Movie.CHILDREN:
+                thisAmount += 1.5m;
+                if (rental.DaysRented > 3)
+                {
+                    thisAmount += (rental.DaysRented - 3) * 1.5m;
+                }
+
+                break;
+        }
+
+        return thisAmount;
     }
 }
