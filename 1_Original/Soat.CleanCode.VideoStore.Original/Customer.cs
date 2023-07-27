@@ -4,8 +4,8 @@ namespace Soat.CleanCode.VideoStore.Original;
 
 public class Customer
 {
-    private readonly List<Rental> _rentals = new List<Rental>();
-    public string Name { get; }
+    private readonly List<Rental> _rentals = new();
+    private string Name { get; }
 
     public Customer(string name)
     {
@@ -22,14 +22,14 @@ public class Customer
         var frequentRenterPoints = 0;
         var totalAmount = 0m;
         var result = "Rental Record for " + Name + "\n";
+        
         foreach (var rental in _rentals)
         {
-            var thisAmount = DetermineAmountForRentals(rental);
+            var thisAmount = rental.DetermineAmount();
 
             frequentRenterPoints++;
 
-            if (rental.Movie.PriceCode == Movie.NEW_RELEASE
-                && rental.DaysRented > 1)
+            if (rental.Movie.PriceCode == Movie.NEW_RELEASE && rental.DaysRented > 1)
             {
                 frequentRenterPoints++;
             }
@@ -42,34 +42,5 @@ public class Customer
         result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points \n";
 
         return result;
-    }
-
-    private static decimal DetermineAmountForRentals(Rental rental)
-    {
-        decimal thisAmount = 0;
-        switch (rental.Movie.PriceCode)
-        {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (rental.DaysRented > 2)
-                {
-                    thisAmount += (rental.DaysRented - 2) * 1.5m;
-                }
-
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += rental.DaysRented * 3;
-                break;
-            case Movie.CHILDREN:
-                thisAmount += 1.5m;
-                if (rental.DaysRented > 3)
-                {
-                    thisAmount += (rental.DaysRented - 3) * 1.5m;
-                }
-
-                break;
-        }
-
-        return thisAmount;
     }
 }
