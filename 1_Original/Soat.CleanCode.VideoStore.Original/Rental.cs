@@ -17,11 +17,7 @@ public class Rental
         switch (Movie.PriceCode)
         {
             case Movie.REGULAR:
-                thisAmount += Movie.BaseAmount;
-                if (DaysRented > 2)
-                {
-                    thisAmount += (DaysRented - 2) * 1.5m;
-                }
+                thisAmount = Movie.CalculateAmountByDaysRented(DaysRented);
 
                 break;
             case Movie.NEW_RELEASE:

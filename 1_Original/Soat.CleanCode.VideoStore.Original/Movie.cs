@@ -29,7 +29,13 @@ public class RegularMovie : Movie
 
     public override decimal CalculateAmountByDaysRented(int daysRented)
     {
-        throw new NotImplementedException();
+        var amount = BaseAmount;
+        if (daysRented > 2)
+        {
+            amount += (daysRented - 2) * 1.5m;
+        }
+
+        return amount;
     }
 }
 
