@@ -17,7 +17,7 @@ public class Rental
         switch (Movie.PriceCode)
         {
             case Movie.REGULAR:
-                thisAmount += 2;
+                thisAmount += Movie.BaseAmount;
                 if (DaysRented > 2)
                 {
                     thisAmount += (DaysRented - 2) * 1.5m;
@@ -25,10 +25,10 @@ public class Rental
 
                 break;
             case Movie.NEW_RELEASE:
-                thisAmount += DaysRented * 3;
+                thisAmount += DaysRented * Movie.BaseAmount;
                 break;
             case Movie.CHILDREN:
-                thisAmount += 1.5m;
+                thisAmount += Movie.BaseAmount;
                 if (DaysRented > 3)
                 {
                     thisAmount += (DaysRented - 3) * 1.5m;

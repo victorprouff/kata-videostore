@@ -1,6 +1,6 @@
 ﻿namespace Soat.CleanCode.VideoStore.Original;
 
-public class Movie
+public abstract class Movie
 {
     public const int REGULAR     = 0;
     public const int NEW_RELEASE = 1;
@@ -16,6 +16,8 @@ public class Movie
         PriceCode = priceCode;
         BaseAmount = baseAmount;
     }
+
+    public abstract decimal CalculateAmountByDaysRented(int daysRented);
 }
 
 public class RegularMovie : Movie
@@ -23,6 +25,11 @@ public class RegularMovie : Movie
     public RegularMovie(string title)
         : base(title, 0, 2)
     {
+    }
+
+    public override decimal CalculateAmountByDaysRented(int daysRented)
+    {
+        throw new NotImplementedException();
     }
 }
 
@@ -32,11 +39,21 @@ public class NewReleaseMovie : Movie
         : base(title, 1, 3)
     {
     }
+
+    public override decimal CalculateAmountByDaysRented(int daysRented)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class ChildrenMovie : Movie
 {
     public ChildrenMovie(string title) : base(title, 2, 1.5m)
     {
+    }
+
+    public override decimal CalculateAmountByDaysRented(int daysRented)
+    {
+        throw new NotImplementedException();
     }
 }
