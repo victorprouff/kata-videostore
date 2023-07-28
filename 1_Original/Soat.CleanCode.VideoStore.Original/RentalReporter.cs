@@ -2,14 +2,14 @@
 
 namespace Soat.CleanCode.VideoStore.Original;
 
-public class Customer
+public class RentalReporter
 {
     private readonly List<Rental> _rentals = new();
-    private string Name { get; }
+    private string CustomerName { get; }
 
-    public Customer(string name)
+    public RentalReporter(string customerName)
     {
-        Name = name;
+        CustomerName = customerName;
     }
 
     public void AddRental(Rental rental)
@@ -17,11 +17,11 @@ public class Customer
         _rentals.Add(rental);
     }
 
-    public string Statement()
+    public string Generate()
     {
         var frequentRenterPoints = 0;
         var totalAmount = 0m;
-        var result = "Rental Record for " + Name + "\n";
+        var result = Header();
 
         foreach (var rental in _rentals)
         {
@@ -29,16 +29,18 @@ public class Customer
 
             frequentRenterPoints += rental.CalculateFrequentRenterPoints();
 
-            result += GetRentalResult(rental.Movie.Title, rentalAmount);
+            result += FormatRentalLine(rental.Movie.Title, rentalAmount);
             totalAmount += rentalAmount;
         }
 
-        result += GetResult(totalAmount, frequentRenterPoints);
+        result += Totals(totalAmount, frequentRenterPoints);
 
         return result;
     }
 
-    private string GetResult(decimal totalAmount, int frequentRenterPoints)
+    private string Header() => "Rental Record for " + CustomerName + "\n";
+
+    private string Totals(decimal totalAmount, int frequentRenterPoints)
     {
         var result = "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points \n";
@@ -46,6 +48,6 @@ public class Customer
         return result;
     }
 
-    private string GetRentalResult(string rentalTitle, decimal rentalAmount) =>
-        $"\t{rentalTitle}\t{rentalAmount.ToString("0.0", CultureInfo.InvariantCulture)}\n";
+    private static string FormatRentalLine(string rentalTitle, decimal amount) =>
+        $"\t{rentalTitle}\t{amount.ToString("0.0", CultureInfo.InvariantCulture)}\n";
 }
