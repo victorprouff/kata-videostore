@@ -40,4 +40,40 @@ public class MovieTests
         
         result.Should().Be(expectedAmount);
     }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    public void TestCalculateFrequentRenterPointsOfRegularMovie(int daysRentals, int expectedPoints)
+    {
+        var movie = new RegularMovie("Lord Of the rings");
+
+        var result = movie.CalculateFrequentRenterPoints(daysRentals);
+        
+        result.Should().Be(expectedPoints);
+    }
+    
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(2, 2)]
+    public void TestCalculateFrequentRenterPointsOfNewReleaseMovie(int daysRentals, int expectedPoints)
+    {
+        var movie = new NewReleaseMovie("Lord Of the rings");
+
+        var result = movie.CalculateFrequentRenterPoints(daysRentals);
+        
+        result.Should().Be(expectedPoints);
+    }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    public void TestCalculateFrequentRenterPointsOfChildrenMovie(int daysRentals, int expectedPoints)
+    {
+        var movie = new ChildrenMovie("Lord Of the rings");
+
+        var result = movie.CalculateFrequentRenterPoints(daysRentals);
+        
+        result.Should().Be(expectedPoints);
+    }
 }

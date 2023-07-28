@@ -18,4 +18,6 @@ public class RegularMovie : Movie
 
         return BaseAmount;
     }
+
+    public override int CalculateFrequentRenterPoints(int daysRented) => BaseFrequentRenterPoints;
 }

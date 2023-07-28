@@ -15,15 +15,5 @@ public class Rental
     
     public decimal DetermineAmount() => Movie.CalculateAmountByDaysRented(DaysRented);
 
-    public int CalculateFrequentRenterPoints()
-    {
-        var frequentRenterPoints = 1;
-        
-        if (Movie is NewReleaseMovie && DaysRented > 1)
-        {
-            frequentRenterPoints++;
-        }
-
-        return frequentRenterPoints;
-    }
+    public int CalculateFrequentRenterPoints() => Movie.CalculateFrequentRenterPoints(DaysRented);
 }

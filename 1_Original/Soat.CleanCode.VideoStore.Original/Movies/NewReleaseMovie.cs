@@ -10,4 +10,13 @@ public class NewReleaseMovie : Movie
     }
 
     public override decimal CalculateAmountByDaysRented(int daysRented) => daysRented * BaseAmount;
+    public override int CalculateFrequentRenterPoints(int daysRented)
+    {
+        if (daysRented > 1)
+        {
+            return BaseFrequentRenterPoints + 1;
+        }
+
+        return BaseFrequentRenterPoints;
+    }
 }

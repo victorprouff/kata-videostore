@@ -17,4 +17,6 @@ public class ChildrenMovie : Movie
 
         return BaseAmount;
     }
+
+    public override int CalculateFrequentRenterPoints(int daysRented) => BaseFrequentRenterPoints;
 }
