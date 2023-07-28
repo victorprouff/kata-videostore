@@ -22,20 +22,30 @@ public class Customer
         var frequentRenterPoints = 0;
         var totalAmount = 0m;
         var result = "Rental Record for " + Name + "\n";
-        
+
         foreach (var rental in _rentals)
         {
-            var thisAmount = rental.DetermineAmount();
+            var rentalAmount = rental.DetermineAmount();
 
             frequentRenterPoints += rental.CalculateFrequentRenterPoints();
 
-            result += "\t" + rental.Movie.Title + "\t" + thisAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-            totalAmount += thisAmount;
+            result += GetRentalResult(rental.Movie.Title, rentalAmount);
+            totalAmount += rentalAmount;
         }
 
-        result += "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points \n";
+        result += GetResult(totalAmount, frequentRenterPoints);
 
         return result;
     }
+
+    private string GetResult(decimal totalAmount, int frequentRenterPoints)
+    {
+        var result = "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points \n";
+        
+        return result;
+    }
+
+    private string GetRentalResult(string rentalTitle, decimal rentalAmount) =>
+        $"\t{rentalTitle}\t{rentalAmount.ToString("0.0", CultureInfo.InvariantCulture)}\n";
 }
