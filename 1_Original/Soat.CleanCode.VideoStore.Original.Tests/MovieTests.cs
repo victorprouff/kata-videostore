@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Soat.CleanCode.VideoStore.Original.Movies;
 
 namespace Soat.CleanCode.VideoStore.Original.Tests;
 

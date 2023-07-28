@@ -1,4 +1,4 @@
-namespace Soat.CleanCode.VideoStore.Original;
+namespace Soat.CleanCode.VideoStore.Original.Movies;
 
 public class NewReleaseMovie : Movie
 {

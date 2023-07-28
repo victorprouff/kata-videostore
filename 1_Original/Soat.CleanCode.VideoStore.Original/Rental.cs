@@ -1,4 +1,6 @@
-﻿namespace Soat.CleanCode.VideoStore.Original;
+﻿using Soat.CleanCode.VideoStore.Original.Movies;
+
+namespace Soat.CleanCode.VideoStore.Original;
 
 public class Rental
 {
