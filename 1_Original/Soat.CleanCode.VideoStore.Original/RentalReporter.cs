@@ -28,24 +28,20 @@ public class RentalReporter
 
     public string Generate() => MakeHeader() + MakeDetails() + MakeTotal();
 
-    private string MakeDetails()
-    {
-        var result = string.Empty;
-
-        foreach (var rental in _rentals)
-        {
-            var rentalAmount = rental.DetermineAmount();
-
-            FrequentRenterPoints += rental.CalculateFrequentRenterPoints();
-
-            result += FormatRentalLine(rental.Movie.Title, rentalAmount);
-            TotalAmount += rentalAmount;
-        }
-
-        return result;
-    }
-
     private string MakeHeader() => "Rental Record for " + CustomerName + "\n";
+
+    private string MakeDetails() =>
+        _rentals.Aggregate(string.Empty, (current, rental) => current + MakeRentalLine(rental));
+
+    private string MakeRentalLine(Rental rental)
+    {
+        var rentalAmount = rental.DetermineAmount();
+
+        FrequentRenterPoints += rental.CalculateFrequentRenterPoints();
+        TotalAmount += rentalAmount;
+
+        return FormatRentalLine(rental.Movie.Title, rentalAmount);
+    }
 
     private string MakeTotal()
     {
