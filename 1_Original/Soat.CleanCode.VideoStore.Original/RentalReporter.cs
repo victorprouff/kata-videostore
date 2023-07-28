@@ -4,12 +4,20 @@ namespace Soat.CleanCode.VideoStore.Original;
 
 public class RentalReporter
 {
+    private int FrequentRenterPoints { get; set; }
+    
     private readonly List<Rental> _rentals = new();
     private string CustomerName { get; }
 
     public RentalReporter(string customerName)
     {
+        ClearTotal();
         CustomerName = customerName;
+    }
+
+    private void ClearTotal()
+    {
+        FrequentRenterPoints = 0;
     }
 
     public void AddRental(Rental rental)
@@ -19,31 +27,37 @@ public class RentalReporter
 
     public string Generate()
     {
-        var frequentRenterPoints = 0;
         var totalAmount = 0m;
         var result = Header();
 
+        result += MakeDetails(result, ref totalAmount);
+
+        result += Totals(totalAmount);
+
+        return result;
+    }
+
+    private string MakeDetails(string result, ref decimal totalAmount)
+    {
         foreach (var rental in _rentals)
         {
             var rentalAmount = rental.DetermineAmount();
 
-            frequentRenterPoints += rental.CalculateFrequentRenterPoints();
+            FrequentRenterPoints += rental.CalculateFrequentRenterPoints();
 
             result += FormatRentalLine(rental.Movie.Title, rentalAmount);
             totalAmount += rentalAmount;
         }
-
-        result += Totals(totalAmount, frequentRenterPoints);
 
         return result;
     }
 
     private string Header() => "Rental Record for " + CustomerName + "\n";
 
-    private string Totals(decimal totalAmount, int frequentRenterPoints)
+    private string Totals(decimal totalAmount)
     {
         var result = "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points \n";
+        result += "You earned " + FrequentRenterPoints + " frequent renter points \n";
         
         return result;
     }
