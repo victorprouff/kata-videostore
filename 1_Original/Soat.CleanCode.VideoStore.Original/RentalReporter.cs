@@ -35,21 +35,17 @@ public class RentalReporter
 
     private string MakeRentalLine(Rental rental)
     {
-        var rentalAmount = rental.DetermineAmount();
+        var amount = rental.DetermineAmount();
 
         FrequentRenterPoints += rental.CalculateFrequentRenterPoints();
-        TotalAmount += rentalAmount;
+        TotalAmount += amount;
 
-        return FormatRentalLine(rental.Movie.Title, rentalAmount);
+        return FormatRentalLine(rental.Movie.Title, amount);
     }
 
-    private string MakeTotal()
-    {
-        var result = "You owed " + TotalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-        result += "You earned " + FrequentRenterPoints + " frequent renter points \n";
-
-        return result;
-    }
+    private string MakeTotal() =>
+        $"You owed {TotalAmount.ToString("0.0", CultureInfo.InvariantCulture)}\n" +
+        $"You earned {FrequentRenterPoints} frequent renter points \n";
 
     private static string FormatRentalLine(string rentalTitle, decimal amount) =>
         $"\t{rentalTitle}\t{amount.ToString("0.0", CultureInfo.InvariantCulture)}\n";
