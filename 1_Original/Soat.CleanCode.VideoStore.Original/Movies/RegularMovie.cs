@@ -11,12 +11,11 @@ public class RegularMovie : Movie
 
     public override decimal CalculateAmountByDaysRented(int daysRented)
     {
-        var amount = BaseAmount;
         if (daysRented > 2)
         {
-            amount += (daysRented - 2) * 1.5m;
+            return BaseAmount + (daysRented - 2) * 1.5m;
         }
 
-        return amount;
+        return BaseAmount;
     }
 }
