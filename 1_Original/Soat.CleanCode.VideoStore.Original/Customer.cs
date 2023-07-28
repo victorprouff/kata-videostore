@@ -21,7 +21,7 @@ public class Customer
     {
         var frequentRenterPoints = 0;
         var totalAmount          = 0m;
-        var result               = "Rental Record for " + Name + "\n";
+        var result               = MakeHeader();
         foreach (var each in _rentals)
         {
             var thisAmount = 0m;
@@ -65,4 +65,6 @@ public class Customer
 
         return result;
     }
+
+    private string MakeHeader() => "Rental Record for " + Name + "\n";
 }
