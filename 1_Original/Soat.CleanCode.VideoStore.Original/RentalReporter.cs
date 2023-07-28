@@ -5,6 +5,7 @@ namespace Soat.CleanCode.VideoStore.Original;
 public class RentalReporter
 {
     private int FrequentRenterPoints { get; set; }
+    private decimal TotalAmount { get; set; }
     private readonly List<Rental> _rentals = new();
     private string CustomerName { get; }
 
@@ -17,6 +18,7 @@ public class RentalReporter
     private void ClearTotals()
     {
         FrequentRenterPoints = 0;
+        TotalAmount = 0m;
     }
 
     public void AddRental(Rental rental)
@@ -26,17 +28,16 @@ public class RentalReporter
 
     public string Generate()
     {
-        var totalAmount = 0m;
-        var result = Header();
+        var result = MakeHeader();
 
-        MakeDetails(ref result, ref totalAmount);
+        MakeDetails(ref result);
 
-        result += Totals(totalAmount, FrequentRenterPoints);
+        result += MakeTotal();
 
         return result;
     }
 
-    private int MakeDetails(ref string result, ref decimal totalAmount)
+    private void MakeDetails(ref string result)
     {
         foreach (var rental in _rentals)
         {
@@ -45,18 +46,16 @@ public class RentalReporter
             FrequentRenterPoints += rental.CalculateFrequentRenterPoints();
 
             result += FormatRentalLine(rental.Movie.Title, rentalAmount);
-            totalAmount += rentalAmount;
+            TotalAmount += rentalAmount;
         }
-
-        return FrequentRenterPoints;
     }
 
-    private string Header() => "Rental Record for " + CustomerName + "\n";
+    private string MakeHeader() => "Rental Record for " + CustomerName + "\n";
 
-    private string Totals(decimal totalAmount, int frequentRenterPoints)
+    private string MakeTotal()
     {
-        var result = "You owed " + totalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points \n";
+        var result = "You owed " + TotalAmount.ToString("0.0", CultureInfo.InvariantCulture) + "\n";
+        result += "You earned " + FrequentRenterPoints + " frequent renter points \n";
         
         return result;
     }
